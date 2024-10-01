@@ -1,4 +1,5 @@
 [submodule "lib"]
 	path = lib
-	url = git@github.com:KentuckySolarCar/teensy_libs.git
+	; url = git@github.com:KentuckySolarCar/teensy_libs.git
+	url = ../teensy_libs.git
 	branch = bottom-shell-reborn
