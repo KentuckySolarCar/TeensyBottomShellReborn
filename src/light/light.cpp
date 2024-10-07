@@ -44,9 +44,11 @@ static THD_FUNCTION(light_route_thd, arg) {
             }
         }
 
+        /* TODO: Uncomment when isBrakePressed is implemented
         if (isBrakePressed) {
             updateBrakeLights(isBrakePressed);
         }
+        */
 
         handleBPSLight();
         chThdSleepMilliseconds(ROUTER_SLEEP);
@@ -76,6 +78,7 @@ static THD_FUNCTION(light_blink_thd, arg) {
         digitalWrite(RUNNING_LIGHTS, lightState.isHeadlightOn);
         digitalWrite(BRAKE_CTRL, lightState.isBrakeOn);
 
+        /* TODO: Uncomment when isThrottleUnlocked is implemented
         if (lightState.isLightTestOn && isThrottleUnlocked) {
             if (millis() - blinkTimer > TURN_SIGNALS_BRIGHTNESS) {
                 blinkTimer = millis();
@@ -87,6 +90,7 @@ static THD_FUNCTION(light_blink_thd, arg) {
                 digitalWrite(BPS_STROBE, isOn);
             }
         }
+        */
 
         chThdSleepMilliseconds(LIGHTS_SLEEP);
     }
