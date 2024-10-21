@@ -1,5 +1,6 @@
 #include "common.h"
 #include "light.h"
+#include "heartbeat.h"
 
 // Initalize CAN ports. See can_setup.h for more info.
 typedef FlexCAN_T4<CAN1, RX_SIZE_256, TX_SIZE_16> can0;
@@ -9,6 +10,7 @@ can1 MotorCan;
 
 void main_setup(){
     lightSetup();
+    heartbeatSetup();
 }
 
 void setup(){

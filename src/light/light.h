@@ -30,7 +30,6 @@ extern struct {
 /**
  * @brief Function called in the "setup" phase. Initializes light threads and establishes light state.
  * Combination of `lightSetup` and `routerSetup` from TBS.
- * @param msg Input CAN message. Assumes correct ID and layout.
  */
 void lightSetup();
 
@@ -52,7 +51,7 @@ void updateRightLight(CAN_message_t msg);
 void updateHeadlights(CAN_message_t msg);
 /**
  * @brief Function to update brake lights based on an already parsed can message. Called in response to a change in the brakes.
- * @param msg Input CAN message. Assumes correct ID and layout.
+ * @param msg Input bool.
  */
 void updateBrakeLights(bool msg);
 
@@ -63,7 +62,7 @@ void updateBrakeLights(bool msg);
 void updateBPSLight(CAN_message_t msg);
 
 /**
- * @brief
+ * @brief TODO
  */
 void updateYButtonLong(CAN_message_t msg);
 
