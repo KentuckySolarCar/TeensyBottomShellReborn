@@ -20,4 +20,18 @@
 #define HEARTBEAT_WA 512
 #define HEARTBEAT_SLEEP 100
 
+/**
+ * @brief A templated function for parsing a CAN message buffer into desired data types.
+ * @details This 
+ */
+template<typename T, int offset>
+T parseCANBuf(const CAN_message_t &msg) {
+  // make sure we can store read enough data from CAN buffer
+  constexpr size_t dataBounds = sizeof(T)*(offset+1);
+  static_assert(dataBounds <= 8, "can't read buffer! index out of bounds");
+  T ret;
+  memcpy(&ret, &msg.buf[0] + offset * sizeof(T), sizeof(T));
+  return ret;
+}
+
 #endif
