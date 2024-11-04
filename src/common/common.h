@@ -22,7 +22,7 @@
 
 /**
  * @brief A templated function for parsing a CAN message buffer into desired data types.
- * @details This 
+ * @details This function accepts two templated inputs; both of them determine the size and offset of the inputted CAN message. These must be known at compile time.
  */
 template<typename T, int offset>
 T parseCANBuf(const CAN_message_t &msg) {

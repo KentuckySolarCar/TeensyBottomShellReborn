@@ -1,4 +1,5 @@
 #include "inputs.h"
+#include "can_msg_ids.h"
 
 struct {
     // true if from wheel, false if from panel
@@ -12,6 +13,15 @@ struct {
     // true if cruise regen is enabled
     bool cruiseRegen;
 } switchBoard;
+
+void handleCANData(const CAN_message_t &msg) {
+    switch (msg.id) {
+        case CAN_BUTTON_R: { handleWheelOrPanel(msg); break; }
+        case CAN_BUTTON_B: { handleWheelForRev(msg); break; }
+        case CAN_BUTTON_X: { handleCruiseRegen(msg); break; }
+        default: { /*error?*/ }
+    }
+}
 
 bool getForwardReverse() {
     if (switchBoard.fromWheel) {
@@ -34,14 +44,14 @@ inline bool isWheel() {
     return switchBoard.fromWheel;
 }
 
-inline void handleWheelOrPanel(CAN_message_t msg) {
+inline void handleWheelOrPanel(const CAN_message_t &msg) {
     switchBoard.fromWheel = (parseCANBuf<short, 0>(msg) % 2) == 0;
 }
 
-inline void handleWheelForRev(CAN_message_t msg) {
+inline void handleWheelForRev(const CAN_message_t &msg) {
     switchBoard.wheelForward = (parseCANBuf<short, 0>(msg) % 2) == 0;
 }
 
-inline void handleCruiseRegen(CAN_message_t msg) {
+inline void handleCruiseRegen(const CAN_message_t &msg) {
     switchBoard.cruiseRegen = (parseCANBuf<short, 1>(msg) % 2) != 0;
 }

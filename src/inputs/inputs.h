@@ -6,6 +6,11 @@
 #include "common.h"
 
 /**
+ * @brief A routing function for the other state modifiers in this file. TODO more docs
+ */
+void handleCANData(const CAN_message_t &msg);
+
+/**
  * @brief Returns whether the brake is currently pressed to any degree.
  */
 bool getBrakeSwitch();
